@@ -1,0 +1,10 @@
+C:\Users\Juan Manuel Arreola\Documents\DSOO\DSOO---2021\ConsultorioMedico\bin\Debug\ConsultorioMedico.exe.config
+C:\Users\Juan Manuel Arreola\Documents\DSOO\DSOO---2021\ConsultorioMedico\bin\Debug\ConsultorioMedico.exe
+C:\Users\Juan Manuel Arreola\Documents\DSOO\DSOO---2021\ConsultorioMedico\bin\Debug\ConsultorioMedico.pdb
+C:\Users\Juan Manuel Arreola\Documents\DSOO\DSOO---2021\ConsultorioMedico\obj\Debug\ConsultorioMedico.csprojAssemblyReference.cache
+C:\Users\Juan Manuel Arreola\Documents\DSOO\DSOO---2021\ConsultorioMedico\obj\Debug\ConsultorioMedico.Properties.Resources.resources
+C:\Users\Juan Manuel Arreola\Documents\DSOO\DSOO---2021\ConsultorioMedico\obj\Debug\ConsultorioMedico.csproj.GenerateResource.cache
+C:\Users\Juan Manuel Arreola\Documents\DSOO\DSOO---2021\ConsultorioMedico\obj\Debug\ConsultorioMedico.exe
+C:\Users\Juan Manuel Arreola\Documents\DSOO\DSOO---2021\ConsultorioMedico\obj\Debug\ConsultorioMedico.pdb
+C:\Users\Juan Manuel Arreola\Documents\DSOO\DSOO---2021\ConsultorioMedico\obj\Debug\ConsultorioMedico.Login.resources
+C:\Users\Juan Manuel Arreola\Documents\DSOO\DSOO---2021\ConsultorioMedico\obj\Debug\ConsultorioMedico.PanelControl.resources

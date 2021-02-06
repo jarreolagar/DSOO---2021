@@ -1,0 +1,9 @@
+C:\Users\Juan Manuel Arreola\Documents\DSOO\DSOO---2021\Examen1erParcialPVE\bin\Debug\Examen1erParcialPVE.exe.config
+C:\Users\Juan Manuel Arreola\Documents\DSOO\DSOO---2021\Examen1erParcialPVE\bin\Debug\Examen1erParcialPVE.exe
+C:\Users\Juan Manuel Arreola\Documents\DSOO\DSOO---2021\Examen1erParcialPVE\bin\Debug\Examen1erParcialPVE.pdb
+C:\Users\Juan Manuel Arreola\Documents\DSOO\DSOO---2021\Examen1erParcialPVE\obj\Debug\Examen1erParcialPVE.csprojAssemblyReference.cache
+C:\Users\Juan Manuel Arreola\Documents\DSOO\DSOO---2021\Examen1erParcialPVE\obj\Debug\Examen1erParcialPVE.Form1.resources
+C:\Users\Juan Manuel Arreola\Documents\DSOO\DSOO---2021\Examen1erParcialPVE\obj\Debug\Examen1erParcialPVE.Properties.Resources.resources
+C:\Users\Juan Manuel Arreola\Documents\DSOO\DSOO---2021\Examen1erParcialPVE\obj\Debug\Examen1erParcialPVE.csproj.GenerateResource.cache
+C:\Users\Juan Manuel Arreola\Documents\DSOO\DSOO---2021\Examen1erParcialPVE\obj\Debug\Examen1erParcialPVE.exe
+C:\Users\Juan Manuel Arreola\Documents\DSOO\DSOO---2021\Examen1erParcialPVE\obj\Debug\Examen1erParcialPVE.pdb
