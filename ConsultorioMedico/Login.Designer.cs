@@ -117,10 +117,10 @@
 
         private System.Windows.Forms.Label lblUsuario;
         private System.Windows.Forms.Label lblContraseña;
-        private System.Windows.Forms.TextBox txtUsuario;
         private System.Windows.Forms.TextBox txtContrasena;
         private System.Windows.Forms.Button btnIngresar;
         private System.Windows.Forms.Label lblLogin;
+        public System.Windows.Forms.TextBox txtUsuario;
     }
 }
 

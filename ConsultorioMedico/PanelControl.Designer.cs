@@ -53,6 +53,7 @@
             this.btnDoctor.TabIndex = 0;
             this.btnDoctor.Text = "Doctores";
             this.btnDoctor.UseVisualStyleBackColor = true;
+            this.btnDoctor.Click += new System.EventHandler(this.btnDoctor_Click);
             // 
             // btnPaciente
             // 
@@ -63,6 +64,7 @@
             this.btnPaciente.TabIndex = 1;
             this.btnPaciente.Text = "Pacientes";
             this.btnPaciente.UseVisualStyleBackColor = true;
+            this.btnPaciente.Click += new System.EventHandler(this.btnPaciente_Click);
             // 
             // btnConsulta
             // 

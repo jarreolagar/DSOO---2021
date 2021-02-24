@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ConsultorioMedico
@@ -13,22 +6,22 @@ namespace ConsultorioMedico
     public partial class Login : Form
     {
         //Se crea esta clase para poder acceder a los métodos de _businessLogicLayer
-        private BusinessLogicLayer _businessLogicLayer;
+        private DataAccessLayer _dataAccessLayer;
         public Login()
         {
             InitializeComponent();
-            _businessLogicLayer = new BusinessLogicLayer();
+            _dataAccessLayer = new DataAccessLayer();
         }
 
         private void btnIngresar_Click(object sender, EventArgs e)
         {
             Usuario usuario = new Usuario();
+            
             usuario.usuario = txtUsuario.Text;
             usuario.contrasena = txtContrasena.Text;
 
-            _businessLogicLayer.ingresar(usuario);
-            
-
+            _dataAccessLayer.loginUsuario(usuario);
+           
         }
     }
 }

@@ -13,6 +13,6 @@ namespace ConsultorioMedico
         public int edadDoctor { get; set; }
         public string especialidad { get; set; }
         public string universidad { get; set; }
-        public int idUsuario { get; set; }
+        public string idDoctor { get; set; }
     }
 }

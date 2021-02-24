@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
@@ -12,7 +14,7 @@ namespace ConsultorioMedico
 
         public void loginUsuario(Usuario usuario)
         {
-            
+
             try
             {
                 //Abrir la conexión
@@ -30,7 +32,8 @@ namespace ConsultorioMedico
                 command.Parameters.Add(contrasenaUsuario);
 
                 SqlDataReader dr = command.ExecuteReader();
-                if(dr.Read() == true)
+
+                if (dr.Read() == true)
                 {
                     Login login = new Login();
                     login.Close();
@@ -48,7 +51,101 @@ namespace ConsultorioMedico
                 conn.Close();
             }
 
-          
         }
+
+        //Métodos
+
+        public void guardarDoctor(Doctor doctor)
+        {
+
+            try
+            {
+                conn.Open();
+                string query = @"INSERT INTO doctores (nombreDoctor, apellidoDoctor, edadDoctor, especialidad, universidad)
+                                 VALUES(@nombreDoctor, @apellidoDoctor, @edadDoctor, @especialidad, @universidad)";
+                SqlParameter nombreDoctor = new SqlParameter("@nombreDoctor", doctor.nombreDoctor);
+                SqlParameter apellidoDoctor = new SqlParameter("@apellidoDoctor", doctor.apellidoDoctor);
+                SqlParameter edadDoctor = new SqlParameter("@edadDoctor", doctor.edadDoctor);
+                SqlParameter especialidad = new SqlParameter("@especialidad", doctor.especialidad);
+                SqlParameter universidad = new SqlParameter("@universidad", doctor.universidad);
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.Add(nombreDoctor);
+                cmd.Parameters.Add(apellidoDoctor);
+                cmd.Parameters.Add(edadDoctor);
+                cmd.Parameters.Add(especialidad);
+                cmd.Parameters.Add(universidad);
+
+
+                cmd.ExecuteNonQuery();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+        }
+
+        public int eliminarDoctor(string procedure, string parametros, string valores)
+        {
+            conn.Open();
+            SqlCommand cmd = new SqlCommand(procedure, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue(parametros, valores);
+
+            int resultado = cmd.ExecuteNonQuery();
+            conn.Close();
+            return resultado;
+        }
+
+        public int buscarDoctor(string procedure, string parametros, string valores)
+        {
+            conn.Open();
+            SqlCommand cmd = new SqlCommand(procedure, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue(parametros, valores);
+
+            int resultado = cmd.ExecuteNonQuery();
+            conn.Close();
+            return resultado;
+        }
+
+        public DataTable obtenerDoctores(string procedure, string parametros, string valores)
+        {
+            conn.Open();
+            SqlCommand cmd = new SqlCommand(procedure, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue(parametros, valores);
+            DataTable tableDoc = new DataTable();
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            sda.Fill(tableDoc);
+            conn.Close();
+            return tableDoc;
+
+        }
+
+        public int actualizarDoctor(string procedure, ArrayList parametros, ArrayList valores)
+        {
+            conn.Open();
+            SqlCommand cmd = new SqlCommand(procedure, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            for(int datos = 0; datos < parametros.Count; datos++)
+            {
+                cmd.Parameters.AddWithValue(parametros[datos].ToString(), valores[datos]);
+            }
+            
+            int resultado = cmd.ExecuteNonQuery();
+            conn.Close();
+            return resultado;
+        }
+
     }
 }
