@@ -47,8 +47,9 @@
             this.txtBuscarDoctor = new System.Windows.Forms.TextBox();
             this.dgvDoc = new System.Windows.Forms.DataGridView();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.btnMostrar = new System.Windows.Forms.Button();
             this.lblBuscarDoc = new System.Windows.Forms.Label();
+            this.lblClinica = new System.Windows.Forms.Label();
+            this.cmbClinica = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDoc)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -169,7 +170,7 @@
             // btnGuardarDoctor
             // 
             this.btnGuardarDoctor.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGuardarDoctor.Location = new System.Drawing.Point(93, 345);
+            this.btnGuardarDoctor.Location = new System.Drawing.Point(93, 385);
             this.btnGuardarDoctor.Name = "btnGuardarDoctor";
             this.btnGuardarDoctor.Size = new System.Drawing.Size(96, 31);
             this.btnGuardarDoctor.TabIndex = 13;
@@ -180,7 +181,7 @@
             // btnEliminarDoctor
             // 
             this.btnEliminarDoctor.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEliminarDoctor.Location = new System.Drawing.Point(452, 345);
+            this.btnEliminarDoctor.Location = new System.Drawing.Point(417, 385);
             this.btnEliminarDoctor.Name = "btnEliminarDoctor";
             this.btnEliminarDoctor.Size = new System.Drawing.Size(96, 31);
             this.btnEliminarDoctor.TabIndex = 14;
@@ -191,7 +192,7 @@
             // btnModificarDoctor
             // 
             this.btnModificarDoctor.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnModificarDoctor.Location = new System.Drawing.Point(331, 345);
+            this.btnModificarDoctor.Location = new System.Drawing.Point(249, 385);
             this.btnModificarDoctor.Name = "btnModificarDoctor";
             this.btnModificarDoctor.Size = new System.Drawing.Size(96, 31);
             this.btnModificarDoctor.TabIndex = 15;
@@ -202,7 +203,7 @@
             // btnLimpiarCampos
             // 
             this.btnLimpiarCampos.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLimpiarCampos.Location = new System.Drawing.Point(574, 345);
+            this.btnLimpiarCampos.Location = new System.Drawing.Point(574, 385);
             this.btnLimpiarCampos.Name = "btnLimpiarCampos";
             this.btnLimpiarCampos.Size = new System.Drawing.Size(144, 31);
             this.btnLimpiarCampos.TabIndex = 16;
@@ -213,7 +214,7 @@
             // txtBuscarDoctor
             // 
             this.txtBuscarDoctor.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBuscarDoctor.Location = new System.Drawing.Point(179, 287);
+            this.txtBuscarDoctor.Location = new System.Drawing.Point(179, 324);
             this.txtBuscarDoctor.Name = "txtBuscarDoctor";
             this.txtBuscarDoctor.Size = new System.Drawing.Size(259, 29);
             this.txtBuscarDoctor.TabIndex = 18;
@@ -222,10 +223,11 @@
             // dgvDoc
             // 
             this.dgvDoc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDoc.Location = new System.Drawing.Point(93, 399);
+            this.dgvDoc.Location = new System.Drawing.Point(93, 439);
             this.dgvDoc.Name = "dgvDoc";
             this.dgvDoc.Size = new System.Drawing.Size(625, 275);
             this.dgvDoc.TabIndex = 20;
+            this.dgvDoc.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDoc_CellClick);
             // 
             // pictureBox1
             // 
@@ -237,35 +239,44 @@
             this.pictureBox1.TabIndex = 21;
             this.pictureBox1.TabStop = false;
             // 
-            // btnMostrar
-            // 
-            this.btnMostrar.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMostrar.Location = new System.Drawing.Point(214, 345);
-            this.btnMostrar.Name = "btnMostrar";
-            this.btnMostrar.Size = new System.Drawing.Size(96, 31);
-            this.btnMostrar.TabIndex = 22;
-            this.btnMostrar.Text = "Mostrar";
-            this.btnMostrar.UseVisualStyleBackColor = true;
-            this.btnMostrar.Click += new System.EventHandler(this.btnMostrar_Click);
-            // 
             // lblBuscarDoc
             // 
             this.lblBuscarDoc.AutoSize = true;
             this.lblBuscarDoc.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBuscarDoc.Location = new System.Drawing.Point(36, 290);
+            this.lblBuscarDoc.Location = new System.Drawing.Point(36, 327);
             this.lblBuscarDoc.Name = "lblBuscarDoc";
             this.lblBuscarDoc.Size = new System.Drawing.Size(63, 22);
             this.lblBuscarDoc.TabIndex = 23;
             this.lblBuscarDoc.Text = "Buscar";
+            // 
+            // lblClinica
+            // 
+            this.lblClinica.AutoSize = true;
+            this.lblClinica.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblClinica.Location = new System.Drawing.Point(36, 284);
+            this.lblClinica.Name = "lblClinica";
+            this.lblClinica.Size = new System.Drawing.Size(63, 22);
+            this.lblClinica.TabIndex = 24;
+            this.lblClinica.Text = "Clinica";
+            // 
+            // cmbClinica
+            // 
+            this.cmbClinica.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbClinica.FormattingEnabled = true;
+            this.cmbClinica.Location = new System.Drawing.Point(179, 284);
+            this.cmbClinica.Name = "cmbClinica";
+            this.cmbClinica.Size = new System.Drawing.Size(259, 29);
+            this.cmbClinica.TabIndex = 25;
             // 
             // PantallaDoctor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PaleTurquoise;
-            this.ClientSize = new System.Drawing.Size(812, 689);
+            this.ClientSize = new System.Drawing.Size(812, 726);
+            this.Controls.Add(this.cmbClinica);
+            this.Controls.Add(this.lblClinica);
             this.Controls.Add(this.lblBuscarDoc);
-            this.Controls.Add(this.btnMostrar);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.dgvDoc);
             this.Controls.Add(this.txtBuscarDoctor);
@@ -314,7 +325,8 @@
         private System.Windows.Forms.TextBox txtBuscarDoctor;
         public System.Windows.Forms.DataGridView dgvDoc;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button btnMostrar;
         private System.Windows.Forms.Label lblBuscarDoc;
+        private System.Windows.Forms.Label lblClinica;
+        private System.Windows.Forms.ComboBox cmbClinica;
     }
 }

@@ -55,49 +55,34 @@ namespace ConsultorioMedico
 
         //Métodos
 
-        public void guardarDoctor(Doctor doctor)
+        public int guardarDoctor(string procedure, ArrayList parametros, ArrayList valores)
         {
 
-            try
+            conn.Open();
+            SqlCommand cmd = new SqlCommand(procedure, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            for (int datos = 0; datos < parametros.Count; datos++)
             {
-                conn.Open();
-                string query = @"INSERT INTO doctores (nombreDoctor, apellidoDoctor, edadDoctor, especialidad, universidad)
-                                 VALUES(@nombreDoctor, @apellidoDoctor, @edadDoctor, @especialidad, @universidad)";
-                SqlParameter nombreDoctor = new SqlParameter("@nombreDoctor", doctor.nombreDoctor);
-                SqlParameter apellidoDoctor = new SqlParameter("@apellidoDoctor", doctor.apellidoDoctor);
-                SqlParameter edadDoctor = new SqlParameter("@edadDoctor", doctor.edadDoctor);
-                SqlParameter especialidad = new SqlParameter("@especialidad", doctor.especialidad);
-                SqlParameter universidad = new SqlParameter("@universidad", doctor.universidad);
-
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.Add(nombreDoctor);
-                cmd.Parameters.Add(apellidoDoctor);
-                cmd.Parameters.Add(edadDoctor);
-                cmd.Parameters.Add(especialidad);
-                cmd.Parameters.Add(universidad);
-
-
-                cmd.ExecuteNonQuery();
-
+                cmd.Parameters.AddWithValue(parametros[datos].ToString(), valores[datos]);
             }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                conn.Close();
-            }
+
+            int resultado = cmd.ExecuteNonQuery();
+            conn.Close();
+            return resultado;
 
         }
 
-        public int eliminarDoctor(string procedure, string parametros, string valores)
+        public int eliminarDoctor(string procedure, ArrayList parametros, ArrayList valores)
         {
             conn.Open();
             SqlCommand cmd = new SqlCommand(procedure, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue(parametros, valores);
+            for (int datos = 0; datos < parametros.Count; datos++)
+            {
+                cmd.Parameters.AddWithValue(parametros[datos].ToString(), valores[datos]);
+            }
 
             int resultado = cmd.ExecuteNonQuery();
             conn.Close();
@@ -131,6 +116,20 @@ namespace ConsultorioMedico
 
         }
 
+        public DataTable obtenerDatosConsulta(string procedure, string parametros, string valores)
+        {
+            conn.Open();
+            SqlCommand cmd = new SqlCommand(procedure, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue(parametros, valores);
+            DataTable tableCon = new DataTable();
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            sda.Fill(tableCon);
+            conn.Close();
+            return tableCon;
+
+        }
+
         public int actualizarDoctor(string procedure, ArrayList parametros, ArrayList valores)
         {
             conn.Open();
@@ -146,6 +145,23 @@ namespace ConsultorioMedico
             conn.Close();
             return resultado;
         }
+
+        public int guardarPaciente(string procedure, ArrayList parametros, ArrayList valores)
+        {
+            conn.Open();
+            SqlCommand cmd = new SqlCommand(procedure, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            for(int datos = 0; datos < parametros.Count; datos++)
+            {
+                cmd.Parameters.AddWithValue(parametros[datos].ToString(), valores[datos]);
+            }
+
+            int resultado = cmd.ExecuteNonQuery();
+            conn.Close();
+            return resultado;
+        }
+       
 
     }
 }

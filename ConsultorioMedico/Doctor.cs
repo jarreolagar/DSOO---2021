@@ -14,5 +14,7 @@ namespace ConsultorioMedico
         public string especialidad { get; set; }
         public string universidad { get; set; }
         public string idDoctor { get; set; }
+        public int idClinica { get; set; }
+        public int dhabilitado { get; set; }
     }
 }

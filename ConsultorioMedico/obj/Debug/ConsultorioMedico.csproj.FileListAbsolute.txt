@@ -9,3 +9,6 @@ C:\Users\Juan Manuel Arreola\Documents\DSOO\DSOO---2021\ConsultorioMedico\obj\De
 C:\Users\Juan Manuel Arreola\Documents\DSOO\DSOO---2021\ConsultorioMedico\obj\Debug\ConsultorioMedico.Login.resources
 C:\Users\Juan Manuel Arreola\Documents\DSOO\DSOO---2021\ConsultorioMedico\obj\Debug\ConsultorioMedico.PanelControl.resources
 C:\Users\Juan Manuel Arreola\Documents\DSOO\DSOO---2021\ConsultorioMedico\obj\Debug\ConsultorioMedico.PantallaDoctor.resources
+C:\Users\Juan Manuel Arreola\Documents\DSOO\DSOO---2021\ConsultorioMedico\obj\Debug\ConsultorioMedico.PantallaPaciente.resources
+C:\Users\Juan Manuel Arreola\Documents\DSOO\DSOO---2021\ConsultorioMedico\obj\Debug\ConsultorioMedico.PantallaClinica.resources
+C:\Users\Juan Manuel Arreola\Documents\DSOO\DSOO---2021\ConsultorioMedico\obj\Debug\ConsultorioMedico.PantallaConsultas.resources

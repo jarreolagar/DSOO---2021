@@ -15,10 +15,12 @@ namespace ConsultorioMedico
         {
             InitializeComponent();
             _dataAccessLayer = new DataAccessLayer();
+            llenarComboBoxClinica();
         }
 
         private void btnGuardarDoctor_Click(object sender, EventArgs e)
         {
+            int habilitado = 1;
             bool flag = true;
             Doctor doctor = new Doctor();
 
@@ -27,11 +29,12 @@ namespace ConsultorioMedico
             doctor.edadDoctor = Int32.Parse(txtEdadDoc.Text);
             doctor.especialidad = cmbEspecialidad.Text;
             doctor.universidad = txtUniversidadDoc.Text;
-            //doctor.idUsuario = 
+            doctor.idClinica = Convert.ToInt32(cmbClinica.SelectedValue.ToString());
+            doctor.dhabilitado = habilitado;
 
-            while (String.IsNullOrWhiteSpace(txtNombreDoc.Text) || String.IsNullOrWhiteSpace(txtApellidoDoc.Text) || String.IsNullOrWhiteSpace(txtEdadDoc.Text) || String.IsNullOrWhiteSpace(cmbEspecialidad.Text) || String.IsNullOrWhiteSpace(txtUniversidadDoc.Text))
+            while (String.IsNullOrWhiteSpace(txtNombreDoc.Text) || String.IsNullOrWhiteSpace(txtApellidoDoc.Text) || String.IsNullOrWhiteSpace(txtEdadDoc.Text) || String.IsNullOrWhiteSpace(cmbEspecialidad.Text) || String.IsNullOrWhiteSpace(txtUniversidadDoc.Text) || String.IsNullOrWhiteSpace(cmbClinica.Text))
             {
-                MessageBox.Show("Ingresa nombre");
+                MessageBox.Show("Llena todos los campos");
                 flag = false;
                 break;
             }
@@ -42,16 +45,18 @@ namespace ConsultorioMedico
             }
             else
             {
-                _dataAccessLayer.guardarDoctor(doctor);
-                llenarTablaDoctores();
-                txtNombreDoc.Clear();
-                txtApellidoDoc.Clear();
-                txtEdadDoc.Clear();
-                cmbEspecialidad.Items.Clear();
-                txtUniversidadDoc.Clear();
+                int resultado = _dataAccessLayer.guardarDoctor(
+                    "insertarDoctor",
+                    new ArrayList { "@nombreDoctor", "@apellidoDoctor", "@edadDoctor", "@especialidad", "@universidad", "@idClinica", "@dhabilitado" },
+                    new ArrayList { doctor.nombreDoctor,doctor.apellidoDoctor,doctor.edadDoctor,doctor.especialidad,doctor.universidad,doctor.idClinica,doctor.dhabilitado});
+                if(resultado == 1)
+                {
+                    MessageBox.Show("Registro incertado");
+                    llenarTablaDoctores();
+                }
+                  
             }
         }
-
 
         private void PantallaDoctor_Load(object sender, EventArgs e)
         {
@@ -61,7 +66,10 @@ namespace ConsultorioMedico
         private void llenarTablaDoctores()
         {
             conn.Open();
-            string query = "SELECT idDoctor, nombreDoctor, apellidoDoctor, edadDoctor, especialidad, universidad FROM doctores";
+            string query = @"SELECT doc.idDoctor, doc.nombreDoctor, doc.apellidoDoctor, doc.edadDoctor, doc.especialidad, doc.universidad, cli.nombreClinica
+                             FROM doctores as doc
+                             INNER JOIN clinica as cli ON doc.idClinica=cli.idClinica
+                             WHERE doc.dhabilitado=1";
             SqlDataAdapter sda = new SqlDataAdapter(query, conn);
             DataSet ds = new DataSet();
 
@@ -72,13 +80,15 @@ namespace ConsultorioMedico
 
         private void btnEliminarDoctor_Click(object sender, EventArgs e)
         {
+            int inhabilitar = 0;
             Doctor doctor = new Doctor();
 
             doctor.idDoctor = dgvDoc.CurrentRow.Cells[0].Value.ToString();
-            if (MessageBox.Show("Desea Eliminar?", "AVISO", MessageBoxButtons.YesNo).Equals(DialogResult.Yes))
+            doctor.dhabilitado = inhabilitar;
+            if (MessageBox.Show("¿Desea Eliminar? Se eliminaran también los pacientes con relación al doctor", "AVISO", MessageBoxButtons.YesNo).Equals(DialogResult.Yes))
             {
 
-                int resultado = _dataAccessLayer.eliminarDoctor("eliminarDoctor", "@idDoctor", doctor.idDoctor);
+                int resultado = _dataAccessLayer.eliminarDoctor("eliminarDoc", new ArrayList { "@idDoctor", "@dhabilitado" }, new ArrayList { doctor.idDoctor, doctor.dhabilitado });
                 if (resultado == 1)
                 {
                     MessageBox.Show("Se eliminó correctamente");
@@ -87,7 +97,7 @@ namespace ConsultorioMedico
                 else
                 {
                     MessageBox.Show("No se eliminó");
-                }
+                }      
             }
         }
 
@@ -102,6 +112,7 @@ namespace ConsultorioMedico
             txtEdadDoc.Text = mostrarInfo.Rows[0][2].ToString();
             cmbEspecialidad.Text = mostrarInfo.Rows[0][3].ToString();
             txtUniversidadDoc.Text = mostrarInfo.Rows[0][4].ToString();
+            cmbClinica.Text = mostrarInfo.Rows[0][5].ToString();
         }
 
         private void btnModificarDoctor_Click(object sender, EventArgs e)
@@ -114,14 +125,15 @@ namespace ConsultorioMedico
             doctor.edadDoctor = Int32.Parse(txtEdadDoc.Text);
             doctor.especialidad = cmbEspecialidad.Text;
             doctor.universidad = txtUniversidadDoc.Text;
+            doctor.idClinica = Convert.ToInt32(cmbClinica.SelectedValue.ToString());
 
             doctor.idDoctor = dgvDoc.CurrentRow.Cells[0].Value.ToString();
             if (MessageBox.Show("Desea modificar?", "AVISO", MessageBoxButtons.YesNo).Equals(DialogResult.Yes))
             {
                 int resultado = _dataAccessLayer.actualizarDoctor(
                     "actualizarDoctor",
-                    new ArrayList { "@idDoctor", "@nombreDoctor", "@apellidoDoctor", "@edadDoctor", "@especialidad", "@universidad" },
-                    new ArrayList { doctor.idDoctor, doctor.nombreDoctor, doctor.apellidoDoctor, doctor.edadDoctor, doctor.especialidad, doctor.universidad });
+                    new ArrayList { "@idDoctor", "@nombreDoctor", "@apellidoDoctor", "@edadDoctor", "@especialidad", "@universidad", "@idClinica" },
+                    new ArrayList { doctor.idDoctor, doctor.nombreDoctor, doctor.apellidoDoctor, doctor.edadDoctor, doctor.especialidad, doctor.universidad, doctor.idClinica });
                 if (resultado == 1)
                 {
                     MessageBox.Show("Registro actualizado");
@@ -173,18 +185,10 @@ namespace ConsultorioMedico
 
         private void txtBuscarDoctor_KeyPress(object sender, KeyPressEventArgs e)
         {
-            
-            if (char.IsLetter(e.KeyChar) == string.IsNullOrEmpty(txtBuscarDoctor.Text))
-            {
-                llenarTablaDoctores();
-            }
-            else if (char.IsLetter(e.KeyChar))
-            {
-                DataTable mostrarInfo = _dataAccessLayer.obtenerDoctores("buscarDoctor", "@buscar", e.KeyChar.ToString());
-                dgvDoc.DataSource = mostrarInfo;
-                
-            }
-            
+             
+            DataTable mostrarInfo = _dataAccessLayer.obtenerDoctores("buscarDoctor", "@buscar", e.KeyChar.ToString());
+            dgvDoc.DataSource = mostrarInfo;
+    
         }
 
         private void btnLimpiarCampos_Click(object sender, EventArgs e)
@@ -194,6 +198,32 @@ namespace ConsultorioMedico
             txtEdadDoc.Clear();
             cmbEspecialidad.ResetText();
             txtUniversidadDoc.Clear();
+        }
+
+        void llenarComboBoxClinica()
+        {
+            DataRow dr;
+            conn.Open();
+            string query = "SELECT idClinica, nombreClinica FROM clinica";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+
+            dr = dt.NewRow();
+            dr.ItemArray = new object[] { 0, "--Seleccione Clínica--" };
+            dt.Rows.InsertAt(dr, 0);
+
+            cmbClinica.ValueMember = "idClinica";
+            cmbClinica.DisplayMember = "nombreClinica";
+            cmbClinica.DataSource = dt;
+
+            conn.Close();
+        }
+
+        private void dgvDoc_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            llenarCamposDoctores();
         }
     }
 }
