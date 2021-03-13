@@ -113,7 +113,6 @@ namespace ConsultorioMedico
             sda.Fill(tableDoc);
             conn.Close();
             return tableDoc;
-
         }
 
         public DataTable obtenerDatosConsulta(string procedure, string parametros, string valores)
@@ -127,7 +126,19 @@ namespace ConsultorioMedico
             sda.Fill(tableCon);
             conn.Close();
             return tableCon;
+        }
 
+        public DataTable obtenerDatosMedicamento(string procedure, string parametros, string valores)
+        {
+            conn.Open();
+            SqlCommand cmd = new SqlCommand(procedure, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue(parametros, valores);
+            DataTable tableCon = new DataTable();
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            sda.Fill(tableCon);
+            conn.Close();
+            return tableCon;
         }
 
         public int actualizarDoctor(string procedure, ArrayList parametros, ArrayList valores)
@@ -161,7 +172,23 @@ namespace ConsultorioMedico
             conn.Close();
             return resultado;
         }
-       
+
+        public int guardarCita(string procedure, ArrayList parametros, ArrayList valores)
+        {
+            conn.Open();
+            SqlCommand cmd = new SqlCommand(procedure, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            for (int datos = 0; datos < parametros.Count; datos++)
+            {
+                cmd.Parameters.AddWithValue(parametros[datos].ToString(), valores[datos]);
+            }
+
+            int resultado = cmd.ExecuteNonQuery();
+            conn.Close();
+            return resultado;
+        }
+
 
     }
 }

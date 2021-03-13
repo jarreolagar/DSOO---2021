@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.Collections;
+using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
@@ -33,6 +34,7 @@ namespace ConsultorioMedico
         private void PantallaConsultas_Load(object sender, System.EventArgs e)
         {
             llenarTablaConsultas();
+            llenarTablaAgendadas();
         }
 
         private void llenarCamposPaciente()
@@ -63,11 +65,7 @@ namespace ConsultorioMedico
             mmsg.Subject = "Cita agendada";
             mmsg.SubjectEncoding = System.Text.Encoding.UTF8;
             mmsg.Bcc.Add("jmarreola.gar@outlook.com");
-            mmsg.Body = "Cita agendada con éxito!\n" +
-                        "Paciente: " + txtNombre.Text + " " + txtApellido.Text + "\n" +
-                        "Doctor: " + txtDoctor.Text + "\n" +
-                        "Clinica: " + txtClinica.Text + "\n" +
-                        "Fecha: " + dateTimePicker1.Value.ToString();
+            mmsg.Body = @"<h2>Tu cita ha sido agendada, " + txtNombre.Text + "</h2><p>Paciente: " + txtNombre.Text + " " + txtApellido.Text +"</p><p>Doctor: " + txtDoctor.Text +"</p><p>Clínica: " + txtClinica.Text + "</p><p>Fecha: "+ dateTimePicker1.Value.ToString("dd/MM/yyyy") + "</p><p>Hora: " + dateTimePicker2.Value.ToString("HH:mm") + "</p>"; 
                                            
             mmsg.BodyEncoding = System.Text.Encoding.UTF8;
             mmsg.IsBodyHtml = true;
@@ -79,16 +77,59 @@ namespace ConsultorioMedico
             cliente.Port = 587;
             cliente.EnableSsl = true;
             cliente.Host = "smtp.gmail.com";
-
+            
             try
             {
                 cliente.Send(mmsg);
-                MessageBox.Show("Confirmación enviada!");
+                MessageBox.Show("Cita Agendada");
+
+                Consulta consulta = new Consulta();
+                consulta.nombre = txtNombre.Text;
+                consulta.apellido = txtApellido.Text;
+                consulta.clinica = txtClinica.Text;
+                consulta.fecha = txtClinica.Text;
+                consulta.fecha = dateTimePicker1.Value.ToString("ddMMyyyy");
+                consulta.hora = dateTimePicker2.Value.ToString("HH:mm");
+                consulta.doctor = txtDoctor.Text;
+
+                int resultado = _dataAccessLayer.guardarCita(
+                    "citaAgendada",
+                    new ArrayList { "@nombre", "@apellido", "@clinica", "@fecha", "@hora", "@doctor"},
+                    new ArrayList { consulta.nombre, consulta.apellido, consulta.clinica, consulta.fecha, consulta.hora, consulta.doctor });
+                if (resultado == 1)
+                {
+                    llenarTablaAgendadas();
+                    limpiarCampos();
+                }
             }
             catch
             {
                 MessageBox.Show("Error al enviar");
             }
         }
+
+        private void llenarTablaAgendadas()
+        {
+            conn.Open();
+            string query = @"SELECT *
+                             FROM consulta";
+            SqlDataAdapter sda = new SqlDataAdapter(query, conn);
+            DataSet ds = new DataSet();
+
+            sda.Fill(ds, "consulta");
+            dataGridView2.DataSource = ds.Tables["consulta"].DefaultView;
+            conn.Close();
+        }
+
+        private void limpiarCampos()
+        {
+            txtNombre.Clear();
+            txtApellido.Clear();
+            txtClinica.Clear();
+            txtCorreo.Clear();
+            txtDoctor.Clear();
+        }
+
+    
     }
 }

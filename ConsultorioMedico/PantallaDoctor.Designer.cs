@@ -115,7 +115,16 @@
             "Pediatría",
             "Oncología",
             "Oftalmología",
-            "Dermatología"});
+            "Dermatología",
+            "Anestesiología",
+            "Endocrinología",
+            "Gastroenterología",
+            "Geriatría",
+            "Medicina Interna",
+            "Nefrología",
+            "Reumatología",
+            "Neurología",
+            "Urología"});
             this.cmbEspecialidad.Location = new System.Drawing.Point(179, 201);
             this.cmbEspecialidad.Name = "cmbEspecialidad";
             this.cmbEspecialidad.Size = new System.Drawing.Size(259, 29);
