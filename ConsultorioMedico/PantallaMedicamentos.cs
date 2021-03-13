@@ -97,5 +97,60 @@ namespace ConsultorioMedico
             txtAdministracion.Text = mostrarInfo.Rows[0][2].ToString();
             cmbEspecialidad.Text = mostrarInfo.Rows[0][3].ToString();
         }
+
+        private void btnModificarMed_Click(object sender, EventArgs e)
+        {
+            Medicamento medicamento = new Medicamento();
+            medicamento.nombre = txtNombreMed.Text;
+            medicamento.laboratorio = txtLaboratorio.Text;
+            medicamento.administracion = txtAdministracion.Text;
+            medicamento.especialidad = cmbEspecialidad.Text;
+
+            medicamento.idMedicamento = dataGridMed.CurrentRow.Cells[0].Value.ToString();
+            if (MessageBox.Show("Desea modificar?", "AVISO", MessageBoxButtons.YesNo).Equals(DialogResult.Yes))
+            {
+                int resultado = _dataAccessLayer.actualizarDoctor(
+                    "modificarMedicamento",
+                    new ArrayList { "@idMedicamento", "@nombreMedicamento", "@laboratorio", "@administracion", "@especialidad"},
+                    new ArrayList { medicamento.idMedicamento, medicamento.nombre,medicamento.laboratorio, medicamento.administracion,medicamento.especialidad });
+                if (resultado == 1)
+                {
+                    MessageBox.Show("Registro actualizado");
+                    llenarTablaMedicamentos();
+                }
+            }
+
+        }
+
+        private void btnEliminarMed_Click(object sender, EventArgs e)
+        {
+            int inhabilitar = 0;
+            Medicamento medicamento = new Medicamento();
+
+            medicamento.idMedicamento = dataGridMed.CurrentRow.Cells[0].Value.ToString();
+            medicamento.habilitado = inhabilitar;
+            if (MessageBox.Show("¿Desea Eliminar?", "AVISO", MessageBoxButtons.YesNo).Equals(DialogResult.Yes))
+            {
+
+                int resultado = _dataAccessLayer.eliminarDoctor("eliminarMedicamento", new ArrayList { "@idMedicamento", "@habilitado" }, new ArrayList { medicamento.idMedicamento, medicamento.habilitado });
+                if (resultado == 1)
+                {
+                    MessageBox.Show("Se eliminó correctamente");
+                    llenarTablaMedicamentos();
+                }
+                else
+                {
+                    MessageBox.Show("No se eliminó");
+                }
+            }
+        }
+
+        private void btnLimpiarMed_Click(object sender, EventArgs e)
+        {
+            txtNombreMed.Clear();
+            txtLaboratorio.Clear();
+            txtAdministracion.Clear();
+            cmbEspecialidad.ResetText();
+        }
     }
 }

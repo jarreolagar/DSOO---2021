@@ -85,7 +85,7 @@ namespace ConsultorioMedico
 
             doctor.idDoctor = dgvDoc.CurrentRow.Cells[0].Value.ToString();
             doctor.dhabilitado = inhabilitar;
-            if (MessageBox.Show("¿Desea Eliminar? Se eliminaran también los pacientes con relación al doctor", "AVISO", MessageBoxButtons.YesNo).Equals(DialogResult.Yes))
+            if (MessageBox.Show("¿Desea Eliminar?", "AVISO", MessageBoxButtons.YesNo).Equals(DialogResult.Yes))
             {
 
                 int resultado = _dataAccessLayer.eliminarDoctor("eliminarDoc", new ArrayList { "@idDoctor", "@dhabilitado" }, new ArrayList { doctor.idDoctor, doctor.dhabilitado });
@@ -198,6 +198,7 @@ namespace ConsultorioMedico
             txtEdadDoc.Clear();
             cmbEspecialidad.ResetText();
             txtUniversidadDoc.Clear();
+            cmbClinica.ResetText();
         }
 
         void llenarComboBoxClinica()

@@ -207,6 +207,7 @@
             this.btnModificarMed.TabIndex = 14;
             this.btnModificarMed.Text = "Modificar";
             this.btnModificarMed.UseVisualStyleBackColor = true;
+            this.btnModificarMed.Click += new System.EventHandler(this.btnModificarMed_Click);
             // 
             // btnEliminarMed
             // 
@@ -217,6 +218,7 @@
             this.btnEliminarMed.TabIndex = 15;
             this.btnEliminarMed.Text = "Eliminar";
             this.btnEliminarMed.UseVisualStyleBackColor = true;
+            this.btnEliminarMed.Click += new System.EventHandler(this.btnEliminarMed_Click);
             // 
             // btnLimpiarMed
             // 
@@ -227,6 +229,7 @@
             this.btnLimpiarMed.TabIndex = 16;
             this.btnLimpiarMed.Text = "Limpiar campos";
             this.btnLimpiarMed.UseVisualStyleBackColor = true;
+            this.btnLimpiarMed.Click += new System.EventHandler(this.btnLimpiarMed_Click);
             // 
             // PantallaMedicamentos
             // 
