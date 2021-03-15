@@ -227,14 +227,14 @@
             this.txtBuscarDoctor.Name = "txtBuscarDoctor";
             this.txtBuscarDoctor.Size = new System.Drawing.Size(259, 29);
             this.txtBuscarDoctor.TabIndex = 18;
-            this.txtBuscarDoctor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBuscarDoctor_KeyPress);
+            this.txtBuscarDoctor.TextChanged += new System.EventHandler(this.filtrado);
             // 
             // dgvDoc
             // 
             this.dgvDoc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDoc.Location = new System.Drawing.Point(93, 439);
+            this.dgvDoc.Location = new System.Drawing.Point(16, 439);
             this.dgvDoc.Name = "dgvDoc";
-            this.dgvDoc.Size = new System.Drawing.Size(625, 275);
+            this.dgvDoc.Size = new System.Drawing.Size(774, 275);
             this.dgvDoc.TabIndex = 20;
             this.dgvDoc.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDoc_CellClick);
             // 

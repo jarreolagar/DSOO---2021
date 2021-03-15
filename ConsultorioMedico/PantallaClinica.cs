@@ -114,20 +114,10 @@ namespace ConsultorioMedico
             }
         }
 
-        private void txtBuscarClinica_KeyUp(object sender, KeyEventArgs e)
+        private void filtrar(object sender, EventArgs e)
         {
-            /*DataTable mostrarInfo = _dataAccessLayer.obtenerDoctores("buscarClinica", "@buscar", txtNombreClinica.Text);
-            dataGridClinica.DataSource = mostrarInfo;*/
-            SqlDataAdapter adapt;
-            DataTable dt;
-            conn.Open();
-            adapt = new SqlDataAdapter("SELECT * FROM clinica WHERE clihabilitado=1 AND nombreClinica LIKE '" + txtNombreClinica + "%'", conn);
-            dt = new DataTable();
-            adapt.Fill(dt);
-            dataGridClinica.DataSource = dt;
-            conn.Close();
-            llenarTablaClinica();
-
+            string nombre = txtBuscarClinica.Text;
+            _dataAccessLayer.buscarDoctor("buscarClinica", "buscar", nombre, dataGridClinica);
         }
     }
 }

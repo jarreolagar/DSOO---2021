@@ -183,14 +183,6 @@ namespace ConsultorioMedico
             }
         }
 
-        private void txtBuscarDoctor_KeyPress(object sender, KeyPressEventArgs e)
-        {
-             
-            DataTable mostrarInfo = _dataAccessLayer.obtenerDoctores("buscarDoctor", "@buscar", e.KeyChar.ToString());
-            dgvDoc.DataSource = mostrarInfo;
-    
-        }
-
         private void btnLimpiarCampos_Click(object sender, EventArgs e)
         {
             txtNombreDoc.Clear();
@@ -225,6 +217,18 @@ namespace ConsultorioMedico
         private void dgvDoc_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             llenarCamposDoctores();
+        }
+
+        /*private void txtBuscarDoctor_TextChanged(object sender, EventArgs e)
+        {
+            string nombre = txtBuscarDoctor.Text;
+            _dataAccessLayer.buscarDoctor("buscarDoctor", "buscar", nombre, dgvDoc);
+        }*/
+
+        private void filtrado(object sender, EventArgs e)
+        {
+            string nombre = txtBuscarDoctor.Text;
+            _dataAccessLayer.buscarDoctor("buscarDoctor", "buscar", nombre, dgvDoc);
         }
     }
 }

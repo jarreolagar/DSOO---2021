@@ -37,8 +37,12 @@ namespace ConsultorioMedico
                 {
                     Login login = new Login();
                     login.Close();
-                    PanelControl panel = new PanelControl();
-                    panel.Show();
+                    MenuPrincipal menuPrincipal = new MenuPrincipal();
+                    menuPrincipal.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Datos incorrectos");
                 }
 
             }
@@ -89,7 +93,7 @@ namespace ConsultorioMedico
             return resultado;
         }
 
-        public int buscarDoctor(string procedure, string parametros, string valores)
+        public void buscarDoctor(string procedure, string parametros, string valores, DataGridView grilla)
         {
             conn.Open();
             SqlCommand cmd = new SqlCommand(procedure, conn);
@@ -97,9 +101,11 @@ namespace ConsultorioMedico
 
             cmd.Parameters.AddWithValue(parametros, valores);
 
-            int resultado = cmd.ExecuteNonQuery();
+            DataTable tabla = new DataTable();
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            sda.Fill(tabla);
+            grilla.DataSource = tabla;
             conn.Close();
-            return resultado;
         }
 
         public DataTable obtenerDoctores(string procedure, string parametros, string valores)

@@ -53,6 +53,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lblCorreo = new System.Windows.Forms.Label();
             this.txtCorreo = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtBuscarPaciente = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPacientes)).BeginInit();
             this.SuspendLayout();
@@ -209,7 +211,7 @@
             // dgvPacientes
             // 
             this.dgvPacientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPacientes.Location = new System.Drawing.Point(25, 489);
+            this.dgvPacientes.Location = new System.Drawing.Point(25, 528);
             this.dgvPacientes.Name = "dgvPacientes";
             this.dgvPacientes.Size = new System.Drawing.Size(631, 150);
             this.dgvPacientes.TabIndex = 16;
@@ -218,7 +220,7 @@
             // btnGuardarPac
             // 
             this.btnGuardarPac.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGuardarPac.Location = new System.Drawing.Point(25, 440);
+            this.btnGuardarPac.Location = new System.Drawing.Point(25, 479);
             this.btnGuardarPac.Name = "btnGuardarPac";
             this.btnGuardarPac.Size = new System.Drawing.Size(96, 31);
             this.btnGuardarPac.TabIndex = 17;
@@ -229,7 +231,7 @@
             // btnModificarPac
             // 
             this.btnModificarPac.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnModificarPac.Location = new System.Drawing.Point(184, 440);
+            this.btnModificarPac.Location = new System.Drawing.Point(184, 479);
             this.btnModificarPac.Name = "btnModificarPac";
             this.btnModificarPac.Size = new System.Drawing.Size(96, 31);
             this.btnModificarPac.TabIndex = 19;
@@ -240,7 +242,7 @@
             // btnEliminarPac
             // 
             this.btnEliminarPac.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEliminarPac.Location = new System.Drawing.Point(356, 440);
+            this.btnEliminarPac.Location = new System.Drawing.Point(356, 479);
             this.btnEliminarPac.Name = "btnEliminarPac";
             this.btnEliminarPac.Size = new System.Drawing.Size(96, 31);
             this.btnEliminarPac.TabIndex = 20;
@@ -251,7 +253,7 @@
             // btnLimpiarCamposPac
             // 
             this.btnLimpiarCamposPac.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLimpiarCamposPac.Location = new System.Drawing.Point(516, 440);
+            this.btnLimpiarCamposPac.Location = new System.Drawing.Point(516, 479);
             this.btnLimpiarCamposPac.Name = "btnLimpiarCamposPac";
             this.btnLimpiarCamposPac.Size = new System.Drawing.Size(140, 31);
             this.btnLimpiarCamposPac.TabIndex = 21;
@@ -287,12 +289,33 @@
             this.txtCorreo.Size = new System.Drawing.Size(220, 29);
             this.txtCorreo.TabIndex = 24;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(22, 424);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(63, 22);
+            this.label2.TabIndex = 25;
+            this.label2.Text = "Buscar";
+            // 
+            // txtBuscarPaciente
+            // 
+            this.txtBuscarPaciente.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBuscarPaciente.Location = new System.Drawing.Point(136, 417);
+            this.txtBuscarPaciente.Name = "txtBuscarPaciente";
+            this.txtBuscarPaciente.Size = new System.Drawing.Size(220, 29);
+            this.txtBuscarPaciente.TabIndex = 26;
+            this.txtBuscarPaciente.TextChanged += new System.EventHandler(this.filtrado);
+            // 
             // PantallaPaciente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PaleTurquoise;
             this.ClientSize = new System.Drawing.Size(679, 690);
+            this.Controls.Add(this.txtBuscarPaciente);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.txtCorreo);
             this.Controls.Add(this.lblCorreo);
             this.Controls.Add(this.label1);
@@ -353,5 +376,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblCorreo;
         private System.Windows.Forms.TextBox txtCorreo;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtBuscarPaciente;
     }
 }

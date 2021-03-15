@@ -171,5 +171,11 @@ namespace ConsultorioMedico
         {
             llenarCamposPaciente();
         }
+
+        private void filtrado(object sender, EventArgs e)
+        {
+            string nombre = txtBuscarPaciente.Text;
+            _dataAccessLayer.buscarDoctor("buscarPaciente", "buscar", nombre, dgvPacientes);
+        }
     }
 }

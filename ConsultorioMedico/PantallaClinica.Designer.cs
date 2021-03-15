@@ -60,7 +60,7 @@
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(379, 31);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(227, 217);
+            this.pictureBox1.Size = new System.Drawing.Size(227, 175);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
@@ -104,9 +104,9 @@
             // btnGuardar
             // 
             this.btnGuardar.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGuardar.Location = new System.Drawing.Point(68, 220);
+            this.btnGuardar.Location = new System.Drawing.Point(34, 252);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(83, 28);
+            this.btnGuardar.Size = new System.Drawing.Size(104, 28);
             this.btnGuardar.TabIndex = 6;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
@@ -115,9 +115,9 @@
             // btnModificar
             // 
             this.btnModificar.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnModificar.Location = new System.Drawing.Point(171, 220);
+            this.btnModificar.Location = new System.Drawing.Point(34, 306);
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(94, 29);
+            this.btnModificar.Size = new System.Drawing.Size(104, 29);
             this.btnModificar.TabIndex = 7;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
@@ -126,9 +126,9 @@
             // btnEliminar
             // 
             this.btnEliminar.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEliminar.Location = new System.Drawing.Point(286, 220);
+            this.btnEliminar.Location = new System.Drawing.Point(35, 354);
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(87, 29);
+            this.btnEliminar.Size = new System.Drawing.Size(103, 29);
             this.btnEliminar.TabIndex = 8;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
@@ -137,9 +137,9 @@
             // dataGridClinica
             // 
             this.dataGridClinica.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridClinica.Location = new System.Drawing.Point(68, 266);
+            this.dataGridClinica.Location = new System.Drawing.Point(176, 251);
             this.dataGridClinica.Name = "dataGridClinica";
-            this.dataGridClinica.Size = new System.Drawing.Size(474, 150);
+            this.dataGridClinica.Size = new System.Drawing.Size(406, 150);
             this.dataGridClinica.TabIndex = 10;
             this.dataGridClinica.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridClinica_CellClick);
             // 
@@ -160,14 +160,14 @@
             this.txtBuscarClinica.Name = "txtBuscarClinica";
             this.txtBuscarClinica.Size = new System.Drawing.Size(220, 27);
             this.txtBuscarClinica.TabIndex = 12;
-            this.txtBuscarClinica.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtBuscarClinica_KeyUp);
+            this.txtBuscarClinica.TextChanged += new System.EventHandler(this.filtrar);
             // 
             // PantallaClinica
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PaleTurquoise;
-            this.ClientSize = new System.Drawing.Size(613, 450);
+            this.ClientSize = new System.Drawing.Size(613, 432);
             this.Controls.Add(this.txtBuscarClinica);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.dataGridClinica);

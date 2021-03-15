@@ -152,5 +152,11 @@ namespace ConsultorioMedico
             txtAdministracion.Clear();
             cmbEspecialidad.ResetText();
         }
+
+        private void filtrar(object sender, EventArgs e)
+        {
+            string nombre = txtBuscar.Text;
+            _dataAccessLayer.buscarDoctor("buscarMed", "buscar", nombre, dataGridMed);
+        }
     }
 }
