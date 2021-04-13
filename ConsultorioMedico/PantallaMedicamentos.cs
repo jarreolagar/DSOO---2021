@@ -1,13 +1,7 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ConsultorioMedico
@@ -25,6 +19,7 @@ namespace ConsultorioMedico
         private void btnGuardarMed_Click(object sender, EventArgs e)
         {
             int habilitado = 1;
+
             bool flag = true;
 
             Medicamento medicamento = new Medicamento();
@@ -50,16 +45,15 @@ namespace ConsultorioMedico
                 int resultado = _dataAccessLayer.guardarDoctor(
                     "insertarMedicamento",
                     new ArrayList { "@nombreMedicamento", "@laboratorio", "@administracion", "@habilitado", "@especialidad" },
-                    new ArrayList { medicamento.nombre, medicamento.laboratorio, medicamento.administracion, medicamento.habilitado, medicamento.especialidad});
+                    new ArrayList { medicamento.nombre, medicamento.laboratorio, medicamento.administracion, medicamento.habilitado, medicamento.especialidad });
                 if (resultado == 1)
                 {
-                    MessageBox.Show("Registro incertado");
+                    MessageBox.Show("Registro insertado");
                     llenarTablaMedicamentos();
                 }
 
             }
 
-            
         }
 
         private void llenarTablaMedicamentos()
@@ -111,8 +105,8 @@ namespace ConsultorioMedico
             {
                 int resultado = _dataAccessLayer.actualizarDoctor(
                     "modificarMedicamento",
-                    new ArrayList { "@idMedicamento", "@nombreMedicamento", "@laboratorio", "@administracion", "@especialidad"},
-                    new ArrayList { medicamento.idMedicamento, medicamento.nombre,medicamento.laboratorio, medicamento.administracion,medicamento.especialidad });
+                    new ArrayList { "@idMedicamento", "@nombreMedicamento", "@laboratorio", "@administracion", "@especialidad" },
+                    new ArrayList { medicamento.idMedicamento, medicamento.nombre, medicamento.laboratorio, medicamento.administracion, medicamento.especialidad });
                 if (resultado == 1)
                 {
                     MessageBox.Show("Registro actualizado");

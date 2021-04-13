@@ -14,3 +14,8 @@ C:\Users\Juan Manuel Arreola\Documents\DSOO\DSOO---2021\ConsultorioMedico\obj\De
 C:\Users\Juan Manuel Arreola\Documents\DSOO\DSOO---2021\ConsultorioMedico\obj\Debug\ConsultorioMedico.PantallaConsultas.resources
 C:\Users\Juan Manuel Arreola\Documents\DSOO\DSOO---2021\ConsultorioMedico\obj\Debug\ConsultorioMedico.MenuPrincipal.resources
 C:\Users\Juan Manuel Arreola\Documents\DSOO\DSOO---2021\ConsultorioMedico\obj\Debug\ConsultorioMedico.PantallaMedicamentos.resources
+C:\Users\Juan Manuel Arreola\Documents\DSOO\DSOO---2021\ConsultorioMedico\bin\Debug\EntityFramework.dll
+C:\Users\Juan Manuel Arreola\Documents\DSOO\DSOO---2021\ConsultorioMedico\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Juan Manuel Arreola\Documents\DSOO\DSOO---2021\ConsultorioMedico\bin\Debug\EntityFramework.xml
+C:\Users\Juan Manuel Arreola\Documents\DSOO\DSOO---2021\ConsultorioMedico\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Juan Manuel Arreola\Documents\DSOO\DSOO---2021\ConsultorioMedico\obj\Debug\ConsultorioMedico.csproj.CopyComplete

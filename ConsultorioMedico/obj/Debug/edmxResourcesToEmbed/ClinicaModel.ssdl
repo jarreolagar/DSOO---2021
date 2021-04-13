@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="consultorioModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="clinica">
+    <Key>
+      <PropertyRef Name="idClinica" />
+    </Key>
+    <Property Name="idClinica" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombreClinica" Type="varchar" MaxLength="60" Nullable="false" />
+    <Property Name="direccionClinica" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="clihabilitado" Type="int" />
+  </EntityType>
+  <EntityContainer Name="consultorioModelStoreContainer">
+    <EntitySet Name="clinica" EntityType="Self.clinica" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

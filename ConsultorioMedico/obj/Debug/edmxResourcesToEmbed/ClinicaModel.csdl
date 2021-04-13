@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="consultorioModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="clinica">
+    <Key>
+      <PropertyRef Name="idClinica" />
+    </Key>
+    <Property Name="idClinica" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombreClinica" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="direccionClinica" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="clihabilitado" Type="Int32" />
+  </EntityType>
+  <EntityContainer Name="consultorioEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="clinicas" EntityType="Self.clinica" />
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="consultorioModelStoreContainer" CdmEntityContainer="consultorioEntities1">
+    <EntitySetMapping Name="clinicas">
+      <EntityTypeMapping TypeName="consultorioModel.clinica">
+        <MappingFragment StoreEntitySet="clinica">
+          <ScalarProperty Name="idClinica" ColumnName="idClinica" />
+          <ScalarProperty Name="nombreClinica" ColumnName="nombreClinica" />
+          <ScalarProperty Name="direccionClinica" ColumnName="direccionClinica" />
+          <ScalarProperty Name="clihabilitado" ColumnName="clihabilitado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

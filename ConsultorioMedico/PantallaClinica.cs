@@ -3,121 +3,121 @@ using System.Collections;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace ConsultorioMedico
 {
     public partial class PantallaClinica : Form
     {
-        private DataAccessLayer _dataAccessLayer;
-        private SqlConnection conn = new SqlConnection("Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=consultorio;Data Source=THINKPAD-L470\\MSSQLSERVER02");
+        
         public PantallaClinica()
         {
             InitializeComponent();
-            _dataAccessLayer = new DataAccessLayer();
         }
+
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             int habilitado = 1;
-            Clinica clinica = new Clinica();
-
-            clinica.nombreClinica = txtNombreClinica.Text;
-            clinica.direccionClinica = txtDireccionClinica.Text;
-            clinica.habilitado = habilitado;
-
-            int resultado = _dataAccessLayer.guardarDoctor("guardarClinica",
-                new ArrayList { "@nombreClinica", "@direccionClinica", "@chabilitado" },
-                new ArrayList { clinica.nombreClinica, clinica.direccionClinica, clinica.habilitado });
-
-            if (resultado == 1)
+            using (consultorioEntities1 db = new consultorioEntities1())
             {
+                clinica clinica1 = new clinica();
+
+                clinica1.nombreClinica = txtNombreClinica.Text;
+                clinica1.direccionClinica = txtDireccionClinica.Text;
+                clinica1.clihabilitado = habilitado;
+
+                db.clinicas.Add(clinica1);
+                db.SaveChanges();
                 MessageBox.Show("Clinica insertada");
-                llenarTablaClinica();
+                Refrescar();
             }
         }
 
-        private void llenarTablaClinica()
-        {
-            conn.Open();
-
-            string query = @"SELECT idClinica, nombreClinica, direccionClinica
-                             FROM clinica WHERE clihabilitado=1";
-
-            SqlDataAdapter sda = new SqlDataAdapter(query, conn);
-            DataSet ds = new DataSet();
-
-            sda.Fill(ds, "clinica");
-            dataGridClinica.DataSource = ds.Tables["clinica"].DefaultView;
-            conn.Close();
-
-        }
+       
 
         private void PantallaClinica_Load(object sender, EventArgs e)
         {
-            llenarTablaClinica();
+            Refrescar();
+        }
+
+        private void Refrescar()
+        {
+            using (consultorioEntities1 db = new consultorioEntities1())
+            {
+                var query = from datos in db.clinicas
+                            where datos.clihabilitado == 1
+                            select datos;
+                /*var lst = from datos in db.clinicas
+                          select datos;*/
+
+                dataGridClinica.DataSource = query.ToList();
+            }
         }
 
         private void dataGridClinica_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            Clinica clinica = new Clinica();
-
-            clinica.idClinica = dataGridClinica.CurrentRow.Cells[0].Value.ToString();
-            DataTable mostrarInfo = _dataAccessLayer.obtenerDoctores("obtenerClinicas", "@idClinica", clinica.idClinica);
-            txtNombreClinica.Text = mostrarInfo.Rows[0][0].ToString();
-            txtDireccionClinica.Text = mostrarInfo.Rows[0][1].ToString();
-
+            if(dataGridClinica.Rows.Count > 0)
+            {
+                foreach(DataGridViewRow row in dataGridClinica.SelectedRows)
+                {
+                    labelid.Text = row.Cells[0].Value.ToString();
+                    txtNombreClinica.Text = row.Cells[1].Value.ToString();
+                    txtDireccionClinica.Text = row.Cells[2].Value.ToString();
+                    
+                }
+            }
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            Clinica clinica = new Clinica();
-
-            clinica.nombreClinica = txtNombreClinica.Text;
-            clinica.direccionClinica = txtDireccionClinica.Text;
-
-            clinica.idClinica = dataGridClinica.CurrentRow.Cells[0].Value.ToString();
-            if (MessageBox.Show("Desea modificar?", "AVISO", MessageBoxButtons.YesNo).Equals(DialogResult.Yes))
+            int id = Convert.ToInt32(labelid.Text);
+            using(consultorioEntities1 db = new consultorioEntities1())
             {
-                int resultado = _dataAccessLayer.actualizarDoctor(
-                    "actualizarClinica",
-                    new ArrayList { "@idClinica", "@nombreClinica", "@direccionClinica" },
-                    new ArrayList { clinica.idClinica, clinica.nombreClinica, clinica.direccionClinica });
-                if (resultado == 1)
-                {
-                    MessageBox.Show("Registro actualizado");
-                    llenarTablaClinica();
-                }
+                clinica modificar = db.clinicas.Where(i => i.idClinica == id).FirstOrDefault();
+                modificar.nombreClinica = txtNombreClinica.Text;
+                modificar.direccionClinica = txtDireccionClinica.Text;
+                db.SaveChanges();
+                Refrescar();
             }
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            int inhabilitar = 0;
-            Clinica clinica = new Clinica();
-
-            clinica.idClinica = dataGridClinica.CurrentRow.Cells[0].Value.ToString();
-            clinica.habilitado = inhabilitar;
-            if (MessageBox.Show("¿Desea Eliminar?", "AVISO", MessageBoxButtons.YesNo).Equals(DialogResult.Yes))
+            int inhabilitado = 0;
+            int id = Convert.ToInt32(labelid.Text);
+            using (consultorioEntities1 db = new consultorioEntities1())
             {
-
-                int resultado = _dataAccessLayer.eliminarDoctor("eliminarClinica", new ArrayList { "@idClinica", "@clihabilitado" }, new ArrayList { clinica.idClinica, clinica.habilitado });
-                if (resultado == 1)
-                {
-                    MessageBox.Show("Se eliminó correctamente");
-                    llenarTablaClinica();
-                }
-                else
-                {
-                    MessageBox.Show("No se eliminó");
-                }
-
+                clinica modificar = db.clinicas.Where(i => i.idClinica == id).FirstOrDefault();
+                modificar.clihabilitado = inhabilitado;
+                
+                db.SaveChanges();
+                Refrescar();
             }
         }
 
-        private void filtrar(object sender, EventArgs e)
+        
+
+        private void btnBuscar_Click(object sender, EventArgs e)
         {
-            string nombre = txtBuscarClinica.Text;
-            _dataAccessLayer.buscarDoctor("buscarClinica", "buscar", nombre, dataGridClinica);
+            using (consultorioEntities1 db = new consultorioEntities1())
+            {
+                var query = from datos in db.clinicas
+                            where datos.nombreClinica == txtBuscarClinica.Text
+                            select datos;
+                /*var lst = from datos in db.clinicas
+                          select datos;*/
+
+                dataGridClinica.DataSource = query.ToList();
+            }
+        }
+
+        private void txtBuscarClinica_TextChanged(object sender, EventArgs e)
+        {
+            if (txtBuscarClinica.Text.Equals(string.Empty))
+            {
+                Refrescar();
+            }
         }
     }
 }

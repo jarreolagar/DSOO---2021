@@ -41,6 +41,8 @@
             this.dataGridClinica = new System.Windows.Forms.DataGridView();
             this.label4 = new System.Windows.Forms.Label();
             this.txtBuscarClinica = new System.Windows.Forms.TextBox();
+            this.labelid = new System.Windows.Forms.Label();
+            this.btnBuscar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridClinica)).BeginInit();
             this.SuspendLayout();
@@ -160,7 +162,28 @@
             this.txtBuscarClinica.Name = "txtBuscarClinica";
             this.txtBuscarClinica.Size = new System.Drawing.Size(220, 27);
             this.txtBuscarClinica.TabIndex = 12;
-            this.txtBuscarClinica.TextChanged += new System.EventHandler(this.filtrar);
+            this.txtBuscarClinica.TextChanged += new System.EventHandler(this.txtBuscarClinica_TextChanged);
+            // 
+            // labelid
+            // 
+            this.labelid.AutoSize = true;
+            this.labelid.Location = new System.Drawing.Point(116, 68);
+            this.labelid.Name = "labelid";
+            this.labelid.Size = new System.Drawing.Size(35, 13);
+            this.labelid.TabIndex = 13;
+            this.labelid.Text = "label5";
+            this.labelid.Visible = false;
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBuscar.Location = new System.Drawing.Point(12, 177);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(104, 28);
+            this.btnBuscar.TabIndex = 14;
+            this.btnBuscar.Text = "Buscar";
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // PantallaClinica
             // 
@@ -168,6 +191,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PaleTurquoise;
             this.ClientSize = new System.Drawing.Size(613, 432);
+            this.Controls.Add(this.btnBuscar);
+            this.Controls.Add(this.labelid);
             this.Controls.Add(this.txtBuscarClinica);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.dataGridClinica);
@@ -204,5 +229,7 @@
         private System.Windows.Forms.DataGridView dataGridClinica;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtBuscarClinica;
+        private System.Windows.Forms.Label labelid;
+        private System.Windows.Forms.Button btnBuscar;
     }
 }
